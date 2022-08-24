@@ -119,6 +119,62 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
             document.getElementById('forgot-popup').style.display = "flex";
 
         }
+
+        var express = require('express'); // Express web server framework
+        var cors = require('cors');
+        var cookieParser = require('cookie-parser');
+        
+        var app = express();
+
+        app.use(express.static(__dirname + '/public'))
+           .use(cors())
+           .use(cookieParser());
+
+        var stateKey = 'spotify_auth_state';
+
+        var client_id = '261c04b256e94036804d51019492e734'; // Your client id
+        var client_secret = '9e432db539ab49a8a0cb22ef6306692a'; // Your secret
+        var redirect_uri = 'http://localhost:8888'; // Your redirect uri
+
+        var generateRandomString = function(length) {
+            var text = '';
+            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+            for (var i = 0; i < length; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        };
+
+
+        app.get('/login', function(req, res) {
+            var state = generateRandomString(16);
+            res.cookie(stateKey, state);
+
+            // const paramsObj = {foo: 'bar', baz: 'bar'};
+            // const searchParams = new URLSearchParams(paramsObj);
+
+            // your application requests authorization
+            var scope = 'user-read-private user-read-email';
+            var redirectURL = ('https://accounts.spotify.com/authorize?' +
+                new URLSearchParams.stringify({
+                response_type: 'code',
+                client_id: client_id,
+                scope: scope,
+                redirect_uri: redirect_uri,
+                state: state
+            }));
+            console.log(redirectURL);
+            // res.redirect('https://accounts.spotify.com/authorize?' +
+            //   new URLSearchParams.stringify({
+            //     response_type: 'code',
+            //     client_id: client_id,
+            //     scope: scope,
+            //     redirect_uri: redirect_uri,
+            //     state: state
+            //   }));
+        });
+
     </script>
 </body>
 
