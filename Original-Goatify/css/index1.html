@@ -1,20 +1,3 @@
-<?php
-
-require('db_connection.php');
-session_start();
-
-# If Login is successful, direct the user to the home page 
-if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == true) {
-
-    echo "
-        <script>
-            alert('WELCOME TO GOTIFY MUSIC PLAYER!'); 
-            window.location.href='home.php'; 
-        </script>
-        ";
-} 
-?>
-
 <!DOCTYPE html>
 <html lang="en"> 
 
@@ -26,7 +9,7 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400&family=Montserrat:ital,wght@1,300&family=Open+Sans:wght@300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="index.css" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
@@ -40,11 +23,11 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
         </header>
 
         <section class="loginBox">
-            <form class="loginForm" method="POST" action="account_changes/login_create_account.php">
+            <form class="loginForm">
                 <h3 class="loginHeader">Enter Email</h3>
                 <div class="loginLine">
                     <button class="loginIconButton" onClick="focusEmail()">
-                        <img class="loginIcon" src="images/account.png"/>
+                        <img class="loginIcon" src="/images/account.png"/>
                     </button>
                     <input class="loginInput" id="loginEmailText" type="email" placeholder="example@gmail.com" name="email" required />
                 </div>
@@ -52,7 +35,7 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
                 <h3 class="loginHeader" >Enter Password</h3>
                 <div class="loginLine"> 
                     <button class="loginIconButton" onClick="focusPassword()">
-                        <img class="loginIcon" src="images/lock.png"/>
+                        <img class="loginIcon" src="/images/lock.png"/>
                     </button>
                     <input class="loginInput" id="loginPassText" type="password" placeholder="goatifyislife" name="password" required />
                 </div>
@@ -65,7 +48,6 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
             </div>
         </section>
     </div>
-
     <!-- <div class="create-account">
         <button type="button" onclick="popup('create-account-popup')">
             CREATE ACCOUNT
@@ -123,58 +105,57 @@ if (isset($_SESSION['login_successful']) && $_SESSION['login_successful'] == tru
     </div>
 
     <div class="forgotPasswordPopup" id="forgot-popup">
-        <div class="popupHeaderWrapper">
-            <h2 class="popupHeader">PASSWORD RESET</h2>
-            <button class="closePopupButton" type="reset" onclick="popup('forgot-popup')">X</button>
-        </div>
+            <div class="popupHeaderWrapper">
+                <h2 class="popupHeader">PASSWORD RESET</h2>
+                <button class="closePopupButton" type="reset" onclick="popup('forgot-popup')">X</button>
+            </div>
 
-        <form class="form_styles" method="POST" action="account_changes/forgot_password_reset.php">
-            <h3 class="popupInputHeader">Enter Email</h3>
-            <input class="popupInput" type="email" placeholder="example@gmail.com" name="email" required />
+            <form class="form_styles" method="POST" action="account_changes/forgot_password_reset.php">
+                <h3 class="popupInputHeader">Enter Email</h3>
+                <input class="popupInput" type="email" placeholder="example@gmail.com" name="email" required />
 
-            <h3 class="popupInputHeader">What is your Mother's Maiden name?</h3>
-            <input class="popupInput" type="text" placeholder="Spangler" name="sq_one" required />
+                <h3 class="popupInputHeader">What is your Mother's Maiden name?</h3>
+                <input class="popupInput" type="text" placeholder="Spangler" name="sq_one" required />
 
-            <h3 class="popupInputHeader">What is your childhood nickname?</h3>
-            <input class="popupInput" type="text" placeholder="Spangy" name="sq_two" required />
+                <h3 class="popupInputHeader">What is your childhood nickname?</h3>
+                <input class="popupInput" type="text" placeholder="Spangy" name="sq_two" required />
 
-            <h3 class="popupInputHeader">What city were you born in?</h3>
-            <input class="popupInput" type="text" placeholder="Orlando" name="sq_three" required />
+                <h3 class="popupInputHeader">What city were you born in?</h3>
+                <input class="popupInput" type="text" placeholder="Orlando" name="sq_three" required />
 
-            <button class="popupSubmit" type="submit" class="preset-btn" name="send-password-reset-link">CONFIRM</button>
-        </form> 
-    </div>
-
-    <div class="createAccountPopup" id="create-account-popup">
-        <div class="popupHeaderWrapper">
-            <h2 class="popupHeader">CREATE ACCOUNT</h2>
-            <button class="closePopupButton" type="reset" onclick="popup('create-account-popup')">X</button>
-        </div>
-
-        <form class="form_styles" method="POST" action="account_changes/login_create_account.php">
-            <h3 class="popupInputHeader">Enter Email</h3>
-            <input class="popupInput" type="email" placeholder="example@gmail.com" name="email" required />
-
-            <h3 class="popupInputHeader">Enter Password</h3>
-            <input class="popupInput" type="password" placeholder="goatifyislife" name="password" required />
-
-            <h3 class="popupInputHeader">What is your Mother's Maiden name?</h3>
-            <input class="popupInput" type="text" placeholder="Spangler" name="sq_one" required />
-
-            <h3 class="popupInputHeader">What is your childhood nickname?</h3>
-            <input class="popupInput" type="text" placeholder="Spangy" name="sq_two" required />
-
-            <h3 class="popupInputHeader">What city were you born in?</h3>
-            <input class="popupInput" type="text" placeholder="Orlando" name="sq_three" required />
-
-            <button class="popupSubmit" type="submit" class="register-btn" name="register">
-                CREATE ACCOUNT
-            </button>
+                <button class="popupSubmit" type="submit" class="preset-btn" name="send-password-reset-link">CONFIRM</button>
             </form>
     </div>
 
+    <div class="createAccountPopup" id="create-account-popup">
+            <div class="popupHeaderWrapper">
+                <h2 class="popupHeader">CREATE ACCOUNT</h2>
+                <button class="closePopupButton" type="reset" onclick="popup('create-account-popup')">X</button>
+            </div>
 
-    <script src="scripts/index.js"></script>
+            <form class="form_styles" method="POST" action="account_changes/login_create_account.php">
+                <h3 class="popupInputHeader">Enter Email</h3>
+                <input class="popupInput" type="email" placeholder="example@gmail.com" name="email" required />
+
+                <h3 class="popupInputHeader">Enter Password</h3>
+                <input class="popupInput" type="password" placeholder="goatifyislife" name="password" required />
+
+                <h3 class="popupInputHeader">What is your Mother's Maiden name?</h3>
+                <input class="popupInput" type="text" placeholder="Spangler" name="sq_one" required />
+
+                <h3 class="popupInputHeader">What is your childhood nickname?</h3>
+                <input class="popupInput" type="text" placeholder="Spangy" name="sq_two" required />
+
+                <h3 class="popupInputHeader">What city were you born in?</h3>
+                <input class="popupInput" type="text" placeholder="Orlando" name="sq_three" required />
+
+                <button class="popupSubmit" type="submit" class="register-btn" name="register">
+                    CREATE ACCOUNT
+                </button>
+            </form>
+    </div>
+
+    <script src="/scripts/index.js"></script>
    
 </body>
 

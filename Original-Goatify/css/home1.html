@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400&family=Montserrat:ital,wght@1,300&family=Open+Sans:wght@300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css" />
+</head>
+
+<body class="gridWrap">
+
+    <header class="headerWrapper">
+        <div class="headerButtonWrapper">
+            <a class="headerButton" href='../logout.php'>LOGOUT</a>
+        </div>
+
+        <h1 class="header">GOATIFY</h1>
+
+        <div class='headerButtonWrapper'>
+            <button class="headerButton" onclick="popup('donate-popup')">
+                Settings
+            </button>
+        </div>
+
+        <div class="popup_container" id="donate-popup">
+            <div class="donation popup">
+                <div>
+                    <button type="reset" onclick="popup('donate-popup')">
+                        X
+                    </button>
+                    <div class="settingButtonWrapper">
+                        <button class="settingButton" type='button' onclick="popup('email-popup')">
+                            CHANGE EMAIL
+                        </button>
+                    </div>
+    
+                    <!-- Change Password -->
+                    <div class="settingButtonWrapper">
+                        <button class="settingButton" type='button' onclick="popup('password-popup')">
+                            CHANGE PASSWORD
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function popup(popup_type) {
+                get_popup = document.getElementById(popup_type);
+
+                if (get_popup.style.display == "flex") {
+                    get_popup.style.display = "none";
+                } else {
+                    get_popup.style.display = "flex";
+                }
+            }
+        </script>
+    </header>
+    
+    <section class="goatifyWrap">
+        <!-- Search Bar -->
+        <section class="searchBar">
+            <form class="searchForm" method="POST" action="../search.php">
+                <input class="searchInput" type="text" placeholder="Search songs" name="search_input" />
+                <button class="searchButton" type="submit" class="search-btn" name="search"> <img class="searchIcon" src="../images/magnifying-glass.png"/></button>
+            </form>
+        </section>
+
+        <section class="playlistListWrapper">
+            <!-- List of Playlists, New Playlist, Delete Playlist  -->
+            <!-- <div class="head_title"> -->
+                <h3 class="playlistListHeader">List of Playlists</h3>
+            <!-- </div> -->
+
+            <!-- <div class="playlists"> -->
+                <div class="playlistList">
+                    <!-- <table border="1px"> -->
+                        <form class="playlistListForm" action='../playlist_pages/redirect.php' method='POST'>
+                                <!-- <tr class="names"> -->
+                                    <!-- <td> -->
+                                        <button class="playlistButton" type='submit' value="$playlistName" name="playlist_button">
+                                            <!-- <?php
+                                            echo $playlist_names[$i];
+                                            ?> -->
+                                            Playlist One
+                                        </button>
+                                        <button class="playlistButton" type='submit' value="$playlistName" name="playlist_button">
+                                            <!-- <?php
+                                            echo $playlist_names[$i];
+                                            ?> -->
+                                            Playlist Two
+                                        </button>
+                                        <button class="playlistButton" type='submit' value="$playlistName" name="playlist_button">
+                                            <!-- <?php
+                                            echo $playlist_names[$i];
+                                            ?> -->
+                                            Playlist Three
+                                        </button>
+                                        <button class="playlistButton" type='submit' value="$playlistName" name="playlist_button">
+                                            <!-- <?php
+                                            echo $playlist_names[$i];
+                                            ?> -->
+                                            Playlist Four
+                                        </button>
+                                        <button class="playlistButton" type='submit' value="$playlistName" name="playlist_button">
+                                            <!-- <?php
+                                            echo $playlist_names[$i];
+                                            ?> -->
+                                            Playlist Five
+                                        </button>
+                                    <!-- </td> -->
+                                <!-- </tr> -->
+                        </form>
+                    <!-- </table> -->
+                </div>
+
+               
+            <!-- </div> -->
+        </section>
+
+        <section class="playlistInfo">
+            <!-- Last Playlist -->
+
+            <!-- <div class="second_title"> -->
+                <h3 class="playlistInfoHeader">Last Played Playlist</h3>
+            <!-- </div> -->
+            <div class="last_playlist">
+                <table border="1px">
+                    <tr class="name">
+                        <td>
+                            <div class="last_played_playlist">
+                                <!-- <?php if ($playlist_status == 0) { ?>
+                                    <button disabled><?php echo $last_playlist_name; ?></button>
+                                <?php } else { ?>
+                                    <button onclick="<?php $_SESSION['current_playlist'] = $last_playlist_name; ?> location.href = '../playlist_pages/playlist_page.php'"><?php echo $last_playlist_name; ?></button>
+                                <?php } ?> -->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Last Song -->
+
+            <!-- <div class="third_title"> -->
+                <h3 class="playlistInfoHeader"> Last Played Song</h3>
+            <!-- </div> -->
+            <div class="last_song">
+                <table border="1px">
+                    <tr class="song_name">
+                        <td>
+                            <div class="music">
+                                <!-- <?php if ($song_status == 0) { ?>
+                                    <button disabled><?php echo $song_name; ?></button>
+                                <?php } else { ?>
+                                    <button onclick="<?php $_SESSION['current_song'] = $song_name; ?> location.href = '../song_pages/song_page.php'"><?php echo $song_name; ?></button>
+                                <?php } ?> -->
+                            </div>
+                            <div>
+                                <!-- <?php
+                                echo '<audio controls>
+                                    <source src="' . $last_song_link . '" type="audio/mpeg">
+                                    Unfortunately, the audio element is not supported in your browser.
+                                </audio>';
+                                ?> -->
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="playlistActionButtons">
+            <!-- <div class="playlist_actions"> -->
+                <div class="playlistActionButtonWrapper">
+                    <a class="playlistActionButton" href='../create_playlist.php'>CREATE PLAYLIST</a>
+                </div>
+                <div class="playlistActionButtonWrapper">
+                    <a class="playlistActionButton" href='../delete_playlist.php'>DELETE PLAYLIST</a>
+                </div>
+            <!-- </div> -->
+
+            <!-- <div class="change"> -->
+                <!-- Change Email -->
+              
+            <!-- </div> -->
+        </section>
+
+
+
+        <div class="popup_container" id="email-popup">
+            <div class="email_popup">
+                <form style="text-align: center" method="POST" action="../account_changes/change_account_info.php">
+                    <h2>
+                        <span>CHANGE EMAIL</span>
+                        <button type="reset" onclick="popup('email-popup')">X</button>
+                    </h2>
+                    <input type="email" placeholder="Current Email" name="p_email" required />
+                    <input type="email" placeholder="New Email" name="email" required />
+                    <br /><br />
+                    <button type="submit" class="email-btn" name="change_email">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup_container" id="password-popup">
+            <div class="password_popup">
+                <form style="text-align: center" method="POST" action="../account_changes/change_account_info.php">
+                    <h2>
+                        <span>CHANGE PASSWORD</span>
+                        <button type="reset" onclick="popup('password-popup')">X</button>
+                    </h2>
+                    <input type="password" placeholder="Current Password" name="p_password" required />
+                    <input type="password" placeholder="New Password" name="password" required />
+                    <br /><br />
+                    <button type="submit" class="password-btn" name="change_password">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function popup(popup_type) {
+                get_popup = document.getElementById(popup_type);
+
+                if (get_popup.style.display == "flex") {
+                    get_popup.style.display = "none";
+                } else {
+                    get_popup.style.display = "flex";
+                }
+            }
+        </script>
+    </section>
+
+    <section class="spotifyWrap">
+        <button>In spotify</button>
+    </section>
+
+    <footer class="footerWrap">
+        <div class="aboutGoatify">
+            <h1 class="aboutGoatifyHeader">About Goatify</h1>
+            <p class="aboutGoatifyText">
+                Goatify was originally a classroom project create by Alfred Yoo, Ahmad Louis, Exdol Davy, and Brandon Spangler. 
+                The goal was to be an online music player proof of concept. 
+                I, Brandon Spangler, later updated some styles and added the ability to connect to your spotify account. 
+                This was done using Spotify's web APIs. 
+                I did this because I thought it would be a cool idea and some good practice using OAuth 2.0 Authorization Flow and calling different APIs.
+            </p>
+        </div>
+
+        <div class="socialLinks">
+            <h1 class="socialLinkHeader">LinkedIn <img class="socialIcon" src="/images/linkedin_logo_white.png"></h1>
+            <div class="socialLinkLine">
+                <a class="socialLink">Brandon Spangler</a> 
+            </div>
+            <div class="socialLinkLine">
+                <a class="socialLink">Alfred Yoo</a> 
+            </div>
+            <div class="socialLinkLine">
+                <a class="socialLink">Ahmad Louis</a> 
+            </div>
+            <div class="socialLinkLine">
+                <a class="socialLink">Exdol Davy</a> 
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
