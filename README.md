@@ -15,3 +15,6 @@ To test out Goatify you can use public@goatify.com for the email and goatify for
 
 Goatify was created by Ahmad Louis, Alfred Yoo, Exdol Davy, and Brandon Spangler. 
 
+# Updates
+
+I later added the function to connect your Spotify account to display some profile information and your top five songs. 
